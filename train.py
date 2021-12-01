@@ -3,10 +3,6 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
-import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image
-from utility import *
 from datasets import *
 from model import VGGnetwork
 import time
@@ -15,7 +11,7 @@ import copy
 
 def train(model):
     since = time.time()
-    num_epochs = 25
+    num_epochs = 15
     criterion = nn.CrossEntropyLoss()
 
     # learning_rate = 0.001
@@ -81,6 +77,7 @@ def train(model):
                 running_corrects += (preds == labels.data).sum()
         epoch_val_loss = val_loss / len(val_set)
         epoch_acc = running_corrects / len(val_set)
+        scheduler.step(epoch_val_loss)
 
         print('Epoch {:2d} Validation Loss: {:.4f} Acc: {:.4f}'.format(epoch,
             epoch_val_loss, epoch_acc))
@@ -117,17 +114,9 @@ if __name__ == '__main__':
         transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
     ])
 
-    # load dataset
-    # trainset = datasets.ImageNet('./data', download=False, transform=transform,split='train')
-    # trainloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True, num_workers=2)
-    # testset = datasets.ImageNet('./data', download=False, transform=transform, split='val')
-    # testloader = torch.utils.data.DataLoader(testset, batch_size=32, shuffle=False, num_workers=2)
+    dataset = CatDogDataset(transform)
+    train_set, val_set = torch.utils.data.random_split(dataset, [20000, 5000])
 
-    # dataset = CatDogDataset(transform)
-    # train_set, val_set = torch.utils.data.random_split(dataset, [20000, 5000])
-
-    train_set = CatDogTrainset(transform)
-    val_set = CatDogValset(transform)
     trainloader = torch.utils.data.DataLoader(train_set, batch_size=32, shuffle=True, num_workers=2)
     valloader = torch.utils.data.DataLoader(val_set, batch_size=32, shuffle=False, num_workers=2)
 

@@ -99,7 +99,7 @@ class VGGnetwork(torch.nn.Module):
             self.conv2_1, nn.BatchNorm2d(128), nn.ReLU(), self.conv2_2, nn.BatchNorm2d(128),  nn.ReLU(), self.pool2,
 
             self.conv3_1, nn.BatchNorm2d(256), nn.ReLU(), self.conv3_2, nn.BatchNorm2d(256), nn.ReLU(),
-            self.conv3_3, nn.BatchNorm2d(64), nn.ReLU(), self.pool3,
+            self.conv3_3, nn.BatchNorm2d(256), nn.ReLU(), self.pool3,
 
             self.conv4_1, nn.BatchNorm2d(512), nn.ReLU(), self.conv4_2, nn.ReLU(),
             self.conv4_3, nn.BatchNorm2d(512), nn.ReLU(), self.pool4)
