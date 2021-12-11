@@ -272,7 +272,7 @@ class VGGnetwork_small(torch.nn.Module):
         )
 
         self.output = nn.Sequential(
-            nn.Linear(14 * 14 * 512, 1024),
+            nn.Linear(8 * 8 * 512, 1024),
             nn.ReLU(),
             nn.Dropout(p=0.5),
             nn.Linear(1024, 256),
@@ -339,7 +339,7 @@ class VGGnetwork_small_bn_after(torch.nn.Module):
         )
 
         self.output = nn.Sequential(
-            nn.Linear(14 * 14 * 512, 1024),
+            nn.Linear(8 * 8 * 512, 1024),
             nn.ReLU(),
             nn.Dropout(p=0.5),
             nn.Linear(1024, 256),
@@ -406,7 +406,7 @@ class VGGnetwork_small_bn_before(torch.nn.Module):
         )
 
         self.output = nn.Sequential(
-            nn.Linear(14 * 14 * 512, 1024),
+            nn.Linear(8 * 8 * 512, 1024),
             nn.ReLU(),
             nn.Dropout(p=0.5),
             nn.Linear(1024, 256),

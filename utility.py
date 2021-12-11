@@ -26,16 +26,16 @@ def prediction(model,img):
     print(res)
     return res
 
-def show(imgs):
-    # plt.figure()
-    if not isinstance(imgs, list):
-        imgs = [imgs]
-    fix, axs = plt.subplots(ncols=len(imgs), squeeze=False)
-    for i, img in enumerate(imgs):
-        img = img.detach()
-        img = F.to_pil_image(img)
-        axs[0, i].imshow(np.asarray(img))
-        axs[0, i].set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
+def plot_prediction(prediction):
+    fig = plt.figure()
+    bars = plt.bar(range(len(prediction)), list(prediction.values()), align='center')
+    for bar in bars:
+        yval = bar.get_height()
+        plt.text(bar.get_x(), yval + .005, yval)
+    plt.xticks(range(len(prediction)), list(prediction.keys()))
+
+    plt.ylabel("prediction")
+    plt.yscale('log')
     plt.show()
 
 def plot_loss(train_loss, val_loss, val_accuracy,name = "VGG"):

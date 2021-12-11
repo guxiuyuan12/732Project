@@ -1,7 +1,7 @@
 from flask import Flask,render_template, request,send_from_directory
 import webbrowser
 from threading import Timer
-from utility import prediction
+from utility import *
 from model import *
 import os
 
@@ -26,8 +26,9 @@ def predict():
         file = request.files['file']
         filename = file.filename
         file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-        res_vgg = prediction(model_vgg,file)
-        res_alex = prediction(model_alex, file)
+        res_vgg = "VGG results: "+str(prediction(model_vgg,file))
+        res_alex = "AlexNet results: " + str(prediction(model_alex, file))
+        # plot_png(res_vgg)
         return render_template('index.html',filename=filename,res_vgg=res_vgg,res_alex=res_alex)
 
 @app.route('/uploads/<filename>')

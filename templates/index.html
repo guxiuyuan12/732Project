@@ -3,8 +3,9 @@
   <head>
     <title>Cat or Dog</title>
   </head>
-  <body>
-    <h1>Cat Dog Classification</h1>
+  <body style="text-align:center;">
+  <div>
+    <h1 >Cat Dog Classification</h1>
     <h2>Upload Image</h2>
     <form method="POST" action="/predict" enctype="multipart/form-data">
       <p><input type="file" name="file"></p>
@@ -21,6 +22,7 @@
       <p>{{res_vgg}}</p>
       <p>{{res_alex}}</p>
     </div>
+  </div>
   </body>
 </html>
 

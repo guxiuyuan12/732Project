@@ -8,7 +8,6 @@ from model import *
 import time
 import copy
 from utility import *
-from PIL import Image
 
 
 def train(model,name = "VGG"):
@@ -24,7 +23,7 @@ def train(model,name = "VGG"):
     # weight_decay = 1e-5
     # optimizer = optim.Adam(list(model.parameters()), lr=learning_rate, weight_decay=weight_decay)
 
-    optimizer = optim.SGD(list(model.parameters()), lr=1e-2, momentum=0.9, weight_decay=0.0005)
+    optimizer = optim.SGD(list(model.parameters()), lr=1e-3, momentum=0.9, weight_decay=0.0005)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.1, patience=2, verbose=True)
 
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -154,6 +153,3 @@ if __name__ == '__main__':
     #                     alex_val_loss, alex_BN_val_loss, 'Validation loss')
     # plot_all_loss(vgg_val_accuracy, vgg_BN_val_accuracy,
     #                     alex_val_accuracy, alex_BN_val_accuracy, 'Validation Accuracy')
-
-    model_vgg.load_state_dict(torch.load('./saved_model/VGG_best_model.pth'))
-    model_alex.load_state_dict(torch.load('./saved_model/AlexNet_best_model.pth'))
