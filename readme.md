@@ -2,7 +2,10 @@
 - install `flask` before you run the app.py
 - download weight file and extract it in /saved_model
   - https://drive.google.com/file/d/1T1NnlwbbKJgHGNJ4f5oUCiPuPfW5-b8J/view?usp=sharing
-- `python app.py` to run
+- `python app.py` to run 
+- Sample result as following
+  ![Alt text](demo.png?raw=true)
+
 - the prediction is given by our pretrained VGG and AlexNet model
 - choose any image (cat or dog) to make a prediction!
     
